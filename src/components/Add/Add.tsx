@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import styles from "./Add.module.css";
+import { useTheme } from "../../hooks/useTheme";
 
 interface Tasks {
   id: number;
@@ -12,49 +13,66 @@ interface AddProps {
 };
 
 const Add:React.FC<AddProps> = ({ onSubmit }) => {
-  const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const { 
+    register, 
+    handleSubmit, 
+    reset, 
+    formState: { errors } 
+  } = useForm<{ title: string; desc: string; }>();
+  const { isDarkMode } = useTheme();
 
-  function handleSubmit() {
-    if (title && desc) {
-      onSubmit({ title, desc });
-      setTitle("");
-      setDesc("");
+  console.log(errors);
+
+  const onSubmitHandler = (data: { title: string; desc: string; }) => {
+    if (data.title.trim() && data.desc.trim()) {
+      onSubmit({ title: data.title, desc: data.desc });
+      reset();
     };
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleSubmit();
+      handleSubmit(onSubmitHandler)();
     };
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.form}>
+    <div className={ styles.container }>
+      <form
+        className={ isDarkMode ? styles.darkform : styles.lightform }
+        onSubmit={ handleSubmit(onSubmitHandler) }
+      >
         <h2>Add New Task</h2>
+
         <label htmlFor="title">Title:</label>
         <input
           type="text"
-          name="title"
-          value={ title }
+          { ...register("title", {
+            required: "Title is required",
+            maxLength: { value: 50, message: "Cannot exceed 50 characters" },
+          }) }
           className={ styles.titleField }
-          onChange={ (e) => setTitle(e.target.value) }
           onKeyUp={ handleKeyPress }
           placeholder="Title"
         />
+
         <label htmlFor="desc">Description:</label>
         <textarea
-          rows={5}
-          name="desc"
-          value={ desc }
+          rows={ 5 }
+          { ...register("desc", { required: "Description is required" }) }
           className={ styles.descField }
-          onChange={ (e) => setDesc(e.target.value) }
           placeholder="Description"
         />
-        <button onClick={ handleSubmit } className={ styles.btn }>Add</button>
-      </div>
+        <div className={ styles.buttons }>
+          <input 
+            className={ isDarkMode ? styles.darkbtn :styles.lightbtn }
+            type="submit"
+            value="Add"
+          />
+        </div>
+      </form>
     </div>
+
   );
 };
 

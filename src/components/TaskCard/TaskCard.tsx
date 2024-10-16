@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./TaskCard.module.css";
+import { useTheme } from "../../hooks/useTheme";
 
 interface TaskCardProps {
   id: number;
@@ -10,37 +11,39 @@ interface TaskCardProps {
   onEdit: (id: number) => void;
 }
 
-const TaskCard:React.FC<TaskCardProps> = (props) => {
-  const { onDelete, onEdit, id, editing } = props;
+const TaskCard: React.FC<TaskCardProps> = ({ id, title, desc, editing, onDelete, onEdit }) => {
   const [isDeleting, setIsDeleting] = useState(false);
+  const { isDarkMode } = useTheme();
 
-  function handleEdit() {
-    onEdit(id)
-  };
-
-  function handleDelete() {
+  const handleDelete = () => {
     setIsDeleting(true);
     setTimeout(() => {
-      onDelete(props.id);
+      onDelete(id);
       setIsDeleting(false);
-    }, 500)
+    }, 500);
   };
 
   return (
-    <div className=
-      {`${styles.card} ${isDeleting ? styles.deleting : ""} ${editing ? styles.editing : ""}`}
+    <div
+      className={`${
+        isDarkMode ? styles.darkcard : styles.lightcard
+      } ${isDeleting ? styles.deleting : ""} ${
+        editing ? styles.editing : ""
+      }`}
     >
-      <h3 className={ styles.title }>{ props.title }</h3>
-      <p className={ styles.desc }>{ props.desc }</p>
+      <h3 className={ 
+          isDarkMode ? styles.darktitle :styles.lighttitle
+        }>{ title }</h3>
+      <p className={ 
+          isDarkMode ? styles.darkdesc : styles.lightdesc
+        }>{ desc }</p>
       <div className={ styles.buttons }>
-        <button 
-          onClick={ handleDelete } 
-          className={ styles.btn }>
+        <button onClick={ handleDelete } className={ 
+          isDarkMode ? styles.darkbtn : styles.lightbtn }>
             Delete
         </button>
-        <button
-          onClick={ handleEdit }
-          className={ styles.btn }>
+        <button onClick={ () => onEdit(id) } className={ 
+          isDarkMode ? styles.darkbtn : styles.lightbtn }>
             Edit
         </button>
       </div>

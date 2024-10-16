@@ -1,0 +1,79 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.overlay > div {
+    width: 300px;
+    height: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+.darkmodal {
+    background: #333;
+    color: white;
+}
+.lightmodal {
+    background: #efefef;
+    color: black;
+}
+
+.darkmodal h3,
+.lightmodal h3 {
+    text-align: center;
+    margin: 0;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.darkmodal div,
+.lightmodal div {
+    display: flex;
+    gap: 10px;
+}
+
+.lightmodal button {
+	flex: 50%;
+	padding: 5px;
+	border: 1px solid #696969;
+	border-radius: 2px;
+	transition: .2s ease;
+	cursor: pointer;
+}
+.lightmodal button:hover {
+    background-color: #696969;
+    color: white;
+}
+.darkmodal button {
+    flex: 50%;
+	padding: 5px;
+	color: white;
+    background-color: #3e3e3e;
+	border: 1px solid #696969;
+    border-radius: 2px;
+	transition: .2s ease;
+	cursor: pointer;
+}
+.darkmodal button:hover {
+    background-color: #c0c0c0;
+    color: #000000;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}

@@ -1,7 +1,7 @@
 import Header from "./components/Header/Header";
 import Tasks from "./components/Tasks/Tasks";
 
-function App() {
+const App = () => {
   return (
     <>
       <Header />

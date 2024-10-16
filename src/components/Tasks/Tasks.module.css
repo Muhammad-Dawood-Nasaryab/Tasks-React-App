@@ -5,3 +5,27 @@
 	align-items: center;
 	flex-direction: row;
 }
+
+.addOrEdit {
+	flex: 45%;
+}
+
+.taskList {
+    flex: 55%;
+}
+
+@media screen and (max-width: 768px) {
+	.container {
+		flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+	}
+
+	.addOrEdit {
+        width: 100%;
+    }
+	
+	.taskList {
+        width: 100%;
+    }
+}

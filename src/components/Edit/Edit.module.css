@@ -8,32 +8,41 @@
 	align-items: center;
 	flex-direction: column;
 	height: 80vh;
-	width: 45%;
 }
 
-.form {
+form {
 	width: 300px;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	background-color: #efefef;
 	padding: 20px 20px;
 	border-radius: 10px;
-	box-shadow: 0 0 15px #00000084;
 	transition: .2s ease;
+	box-shadow: 2px 2px 10px #00000084;
 }
-.form:hover {
+form:hover {
     transform: scale(1.03);
-    box-shadow: 0 0 10px #00000084;
+}
+.lightform {
+	background-color: #efefef;
+}
+.darkform {
+    background-color: #383838;
+	color: white;
 }
 
-.form h2 {
+form h2 {
 	width: 100%;
 	text-align: center;
 	margin: 0;
 	margin-bottom: 10px;
 	font-weight: 600;
+}
+.lightform h2 {
 	color: #292929;
+}
+.darkform h2 {
+    color: #ebebeb;
 }
 
 .titleField,
@@ -43,15 +52,42 @@
 	outline: none;
 }
 
-.btn {
+.buttons {
+	display: flex;
+    gap: 15px;
+}
+
+input[type=submit],
+input[type=button] {
+	flex: 50%;
 	padding: 5px;
 	cursor: pointer;
 	border: 1px solid #696969;
 	border-radius: 2px;
 	transition: .2s ease;
 }
-
-.btn:hover {
+.lightbtn:hover {
     background-color: #696969;
     color: white;
+}
+.darkbtn {
+	color: white;
+    background-color: #333;
+	border: 1px solid #000000;
+}
+.darkbtn:hover {
+    background-color: #c0c0c0;
+    color: #000000;
+}
+
+@media screen and (max-width: 768px) {
+	.container {
+		width: 100%;
+		margin: 0;
+		border-radius: 0;
+	}
+
+	form {
+        width: 60%;
+    }
 }
