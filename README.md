@@ -26,7 +26,7 @@ A responsive **task management app** built with React, leveraging custom hooks, 
 
 1. Clone the repository:  
 ```bash
-git clone https://github.com/your-username/todo-manager.git
+git clone https://github.com/Muhammad-Dawood-Nasaryab/Tasks-React-App.git
 cd Tasks-React-App
 ```
 
